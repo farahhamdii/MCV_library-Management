@@ -1,0 +1,877 @@
+﻿
+@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    :root {
+        --primary: #111827;
+        --primary-light: #1f2937;
+        --accent: #f59e0b;
+        --accent-hover: #d97706;
+        --blue: #3b82f6;
+        --bg: #f4f7fb;
+        --white: #ffffff;
+        --text: #172033;
+        --muted: #64748b;
+        --border: #e5e7eb;
+    }
+
+    body {
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    .home-container {
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .section-label {
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .section-title {
+        font-weight: 800;
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+
+    .section-description {
+        color: var(--muted);
+        max-width: 600px;
+        margin: auto;
+        line-height: 1.7;
+    }
+
+
+    .hero-section {
+        position: relative;
+        overflow: hidden;
+        min-height: 470px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 70px 30px;
+        border-radius: 30px;
+        background: radial-gradient( circle at 85% 15%, rgba(245, 158, 11, 0.22), transparent 25% ), radial-gradient( circle at 10% 90%, rgba(59, 130, 246, 0.18), transparent 30% ), linear-gradient( 135deg, #0f172a, #1e293b 55%, #334155 );
+        box-shadow: 0 25px 60px rgba(15, 23, 42, 0.22);
+    }
+
+        .hero-section::before,
+        .hero-section::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .hero-section::before {
+            width: 320px;
+            height: 320px;
+            top: -160px;
+            right: -80px;
+        }
+
+        .hero-section::after {
+            width: 220px;
+            height: 220px;
+            bottom: -120px;
+            left: -60px;
+        }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+    }
+
+    .hero-icon {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 25px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: var(--accent);
+        font-size: 2.7rem;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+        font-size: clamp(2.3rem, 5vw, 4rem);
+        font-weight: 900;
+        letter-spacing: -1.5px;
+        color: white;
+        margin-bottom: 18px;
+    }
+
+    .hero-description {
+        color: rgba(255,255,255,0.7);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        max-width: 650px;
+        margin: auto;
+    }
+
+    .hero-buttons {
+        margin-top: 32px;
+    }
+
+    .btn-primary-custom {
+        background: var(--accent);
+        color: var(--primary);
+        border: none;
+        border-radius: 12px;
+        padding: 13px 25px;
+        font-weight: 800;
+        transition: 0.3s ease;
+    }
+
+        .btn-primary-custom:hover {
+            background: #fbbf24;
+            color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(245,158,11,0.25);
+        }
+
+    .btn-outline-custom {
+        color: white;
+        border: 1px solid rgba(255,255,255,0.4);
+        border-radius: 12px;
+        padding: 13px 25px;
+        font-weight: 700;
+        transition: 0.3s ease;
+    }
+
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+
+    .features-section {
+        margin-top: 80px;
+    }
+
+    .feature-card {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+    .author-card::before {
+        background: linear-gradient(90deg, #2563eb, #60a5fa);
+    }
+
+    .book-card::before {
+        background: linear-gradient(90deg, #d97706, #fbbf24);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        border-color: transparent;
+        box-shadow: 0 25px 50px rgba(15,23,42,0.12);
+    }
+
+    .feature-body {
+        padding: 50px 35px;
+        text-align: center;
+    }
+
+    .feature-icon {
+        width: 85px;
+        height: 85px;
+        margin: 0 auto 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 22px;
+        color: white;
+        font-size: 2.1rem;
+        transition: 0.35s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+        transform: scale(1.08) rotate(-3deg);
+    }
+
+    .author-icon {
+        background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+        box-shadow: 0 12px 30px rgba(37,99,235,0.25);
+    }
+
+    .book-icon {
+        background: linear-gradient(135deg, #b45309, #f59e0b);
+        box-shadow: 0 12px 30px rgba(245,158,11,0.25);
+    }
+
+    .feature-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+
+    .feature-text {
+        color: var(--muted);
+        line-height: 1.8;
+        max-width: 420px;
+        min-height: 58px;
+        margin: 0 auto 25px;
+    }
+
+    .btn-card {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 11px;
+        padding: 11px 22px;
+        font-weight: 700;
+        transition: 0.3s ease;
+    }
+
+        .btn-card:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+
+    .stats-section {
+        margin-top: 80px;
+        padding: 50px 30px;
+        background: linear-gradient( 135deg, #111827, #1f2937 );
+        border-radius: 26px;
+        color: white;
+        box-shadow: 0 25px 50px rgba(15,23,42,0.15);
+    }
+
+    .stat-item {
+        position: relative;
+    }
+
+    .stat-number {
+        color: var(--accent);
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+
+    .stat-icon {
+        margin-right: 5px;
+        font-size: 1.7rem;
+    }
+
+    .stat-divider {
+        position: absolute;
+        right: 0;
+        top: 10%;
+        height: 80%;
+        width: 1px;
+        background: rgba(255,255,255,0.1);
+    }
+
+
+    .contact-section {
+        margin-top: 80px;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 26px;
+        padding: 55px;
+        box-shadow: 0 20px 45px rgba(15,23,42,0.06);
+    }
+
+    .contact-info {
+        height: 100%;
+        padding-right: 30px;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 28px;
+    }
+
+    .contact-icon {
+        flex-shrink: 0;
+        width: 55px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        background: #fff7e6;
+        color: #b45309;
+        font-size: 1.2rem;
+    }
+
+    .contact-item h6 {
+        font-weight: 800;
+        margin-bottom: 4px;
+    }
+
+    .contact-item p {
+        color: var(--muted);
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .contact-form {
+        background: #f8fafc;
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid #edf0f4;
+    }
+
+    .form-control {
+        border: 1px solid var(--border);
+        border-radius: 11px;
+        padding: 13px 15px;
+        background: white;
+        transition: 0.25s ease;
+    }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(245,158,11,0.12);
+        }
+
+    .btn-submit {
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 11px;
+        padding: 12px 28px;
+        font-weight: 800;
+        transition: 0.3s ease;
+    }
+
+        .btn-submit:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+    .site-footer {
+        margin-top: 80px;
+        padding: 55px 0 20px;
+        background: #0b1120;
+        color: #cbd5e1;
+    }
+
+    .footer-brand {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 800;
+    }
+
+        .footer-brand i {
+            color: var(--accent);
+        }
+
+    .footer-description {
+        max-width: 350px;
+        color: #94a3b8;
+        line-height: 1.7;
+        margin-top: 15px;
+    }
+
+    .site-footer h6 {
+        color: white;
+        font-weight: 800;
+        margin-bottom: 18px;
+    }
+
+    .site-footer ul {
+        padding: 0;
+    }
+
+    .site-footer li {
+        margin-bottom: 10px;
+    }
+
+    .site-footer a {
+        color: #94a3b8;
+        text-decoration: none;
+        transition: 0.25s ease;
+    }
+
+        .site-footer a:hover {
+            color: var(--accent);
+            padding-left: 4px;
+        }
+
+    .footer-social {
+        display: flex;
+        gap: 8px;
+        margin-top: 20px;
+    }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 !important;
+            border-radius: 11px;
+            background: rgba(255,255,255,0.07);
+            transition: 0.3s ease;
+        }
+
+            .footer-social a:hover {
+                background: var(--accent);
+                color: var(--primary);
+                transform: translateY(-4px);
+            }
+
+    .footer-bottom {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        text-align: center;
+        color: #64748b;
+        font-size: 0.85rem;
+    }
+
+
+    @@media (max-width: 768px) {
+
+        .hero-section {
+            min-height: 420px;
+            padding: 55px 20px;
+            border-radius: 22px;
+        }
+
+        .hero-title {
+            font-size: 2.3rem;
+        }
+
+        .hero-buttons .btn {
+            display: block;
+            width: 100%;
+            margin: 10px 0 !important;
+        }
+
+        .features-section,
+        .stats-section,
+        .contact-section {
+            margin-top: 55px;
+        }
+
+        .contact-section {
+            padding: 30px 20px;
+        }
+
+        .contact-info {
+            padding-right: 0;
+        }
+
+        .stat-divider {
+            display: none;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+
+<div class="container py-5 home-container">
+
+
+    <section class="hero-section">
+
+        <div class="hero-content text-center">
+
+            <div class="hero-icon">
+                <i class="bi bi-book-half"></i>
+            </div>
+
+            <h1 class="hero-title">
+                Library Management System
+            </h1>
+
+            <p class="hero-description">
+                Manage your books and authors in one simple,
+                modern and organized platform.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a asp-controller="Book"
+                   asp-action="GetAll"
+                   class="btn btn-primary-custom me-2">
+
+                    <i class="bi bi-book me-1"></i>
+                    View Books
+
+                </a>
+
+                <a asp-controller="Author"
+                   asp-action="GetAll"
+                   class="btn btn-outline-custom">
+
+                    <i class="bi bi-people me-1"></i>
+                    View Authors
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="features-section">
+
+        <div class="text-center mb-5">
+
+            <div class="section-label">
+                Explore
+            </div>
+
+            <h2 class="section-title">
+                Manage Your Library
+            </h2>
+
+            <p class="section-description">
+                Easily manage your authors and books
+                through a clean and intuitive interface.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- AUTHORS -->
+
+            <div class="col-md-6">
+
+                <div class="feature-card author-card">
+
+                    <div class="feature-body">
+
+                        <div class="feature-icon author-icon">
+                            <i class="bi bi-person-badge"></i>
+                        </div>
+
+                        <h3 class="feature-title">
+                            Authors
+                        </h3>
+
+                        <p class="feature-text">
+                            Manage authors, edit their information,
+                            and explore all books associated with them.
+                        </p>
+
+                        <a asp-controller="Author" 
+                           asp-action="GetAll"
+                           class="btn btn-card">
+
+                            Go To Authors
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOOKS -->
+
+            <div class="col-md-6">
+
+                <div class="feature-card book-card">
+
+                    <div class="feature-body">
+
+                        <div class="feature-icon book-icon">
+                            <i class="bi bi-journal-bookmark"></i>
+                        </div>
+
+                        <h3 class="feature-title">
+                            Books
+                        </h3>
+
+                        <p class="feature-text">
+                            Browse books, add new titles,
+                            and update existing book information.
+                        </p>
+
+                        <a asp-controller="Book"
+                           asp-action="GetAll"
+                           class="btn btn-card">
+
+                            Go To Books
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="stats-section">
+
+        <div class="row g-4 text-center">
+
+            <div class="col-6 col-md-3 stat-item">
+
+                <div class="stat-number">
+                    <i class="bi bi-people stat-icon"></i>
+                    120+
+                </div>
+
+                <p class="stat-label">
+                    Authors
+                </p>
+
+                <span class="stat-divider"></span>
+
+            </div>
+
+
+            <div class="col-6 col-md-3 stat-item">
+
+                <div class="stat-number">
+                    <i class="bi bi-journal-bookmark stat-icon"></i>
+                    500+
+                </div>
+
+                <p class="stat-label">
+                    Books
+                </p>
+
+                <span class="stat-divider"></span>
+
+            </div>
+
+
+            <div class="col-6 col-md-3 stat-item">
+
+                <div class="stat-number">
+                    <i class="bi bi-arrow-repeat stat-icon"></i>
+                    1K+
+                </div>
+
+                <p class="stat-label">
+                    Borrowed
+                </p>
+
+                <span class="stat-divider"></span>
+
+            </div>
+
+
+            <div class="col-6 col-md-3 stat-item">
+
+                <div class="stat-number">
+                    <i class="bi bi-star-fill stat-icon"></i>
+                    4.9
+                </div>
+
+                <p class="stat-label">
+                    Rating
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="contact-section">
+
+        <div class="text-center mb-5">
+
+            <div class="section-label">
+                Contact
+            </div>
+
+            <h2 class="section-title">
+                Get In Touch
+            </h2>
+
+            <p class="section-description">
+                Have a question? Send us a message
+                and we'll get back to you.
+            </p>
+
+        </div>
+
+
+        <div class="row g-5">
+
+            <!-- CONTACT INFO -->
+
+            <div class="col-md-4">
+
+                <div class="contact-info">
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+
+                        <div>
+                            <h6>Email</h6>
+                            <p>support@library.com</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+
+                        <div>
+                            <h6>Phone</h6>
+                            <p>+20 100 000 0000</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+
+                        <div>
+                            <h6>Address</h6>
+                            <p>Cairo, Egypt</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-8">
+
+                <form class="contact-form">
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Your Name">
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <input type="email"
+                                   class="form-control"
+                                   placeholder="Your Email">
+
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Subject">
+
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <textarea class="form-control"
+                                      rows="5"
+                                      placeholder="Your Message"></textarea>
+
+                        </div>
+
+
+                        <div class="col-12 text-end">
+
+                            <button type="submit"
+                                    class="btn btn-submit">
+
+                                <i class="bi bi-send me-1"></i>
+                                Send Message
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+
+```

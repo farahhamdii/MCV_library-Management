@@ -1,0 +1,41 @@
+﻿@model MVC_Task.ViewModels.AuthorDetailsVM
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white">
+            <h2>@Model.Name</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Biography:</strong> @Model.Bio</p>
+            <p><strong>Date Of Birth:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+            <p>
+                <strong>Books Count:</strong>
+                @Model.BooksCount
+            </p>
+            <hr />
+            <h4>Books</h4>
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Book Title</th>
+                        <th>Publication Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Books)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.publicationDate.ToShortDateString()</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <a asp-action="GetAll" class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+    </div>
+</div>
